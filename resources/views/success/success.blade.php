@@ -1,0 +1,1 @@
+Bạn đã đăng ký tour thành công!
