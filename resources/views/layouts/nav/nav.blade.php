@@ -14,27 +14,11 @@
 		    <a class="navbar-brand page-scroll">Ha Noi Tour</a>
 	    </div>
 		@yield('navcontent')
-		<div class="row navbar-header" id="search">
+		<div class="navbar-header navbar-right" id="search">
 			<div class="search-form"  style="padding: 5px;">
 		     <form class="form-inline" action="/search">
-		     	<div class="col-sm-2">
-		     		<div class="form-group">
-		            <div class="radio">
-					  <label>
-					    <input type="radio" name="search-type" id="optionsRadios1" value="1" checked>
-					   Tìm tour có sẵn
-					  </label>
-					</div>
-					<div class="radio">
-					  <label>
-					    <input type="radio" name="search-type" id="optionsRadios2" value="2">
-					    Tìm tour đã đăng ký
-					  </label>
-					</div>
-		          </div>
-		     	</div>
-		     	<div class="col-sm-10">
-		     		<div class="form-group">
+		     	<div>
+		     	  <div class="form-group">
 		            <label for="date">Ngày khởi hành: </label>
 		            <input type="date" name="date" class="form-control">
 		          </div>
@@ -47,10 +31,8 @@
 		            </select>
 		          </div>
 		          <div class="form-group">
-		          	<label for="price">Số điện thoại*: </label>
-		          	<input type="text" name="phone" class="form-control" placeholder="Nhập SĐT">
+		          	<button type="submit" class="btn btn-primary">Tìm kiếm</button>
 		          </div>
-		           <button type="submit" class="btn btn-primary">Tìm kiếm</button>
 		     	</div> 
 		    </form>
 		    </div>

@@ -25,13 +25,14 @@
 	    <div class="container">
 	      <div class="row">
 	        <div class="col-lg-6 col-lg-offset-3 text-center">
-	          <h2 class="section-heading">Tên tour</h2>
+	          <h2 class="section-heading">Tên địa điểm</h2>
 	          <hr>
 	           <p>
-	            Mô tả chi tiết tour
+	            Mô tả chi tiết
 	          </p>
 
 	      </div>
 	    </div>
  	</section>
 @endsection
+

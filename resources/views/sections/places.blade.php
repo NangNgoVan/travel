@@ -8,7 +8,7 @@
           <figcaption>
             <h3>{{$place->title}}</h3>
             {{$place->description}}
-            <a class="btn" href="/tour/{{$place->id}}">chi tiết</a>
+            <a class="btn" href="/place/{{$place->id}}">chi tiết</a>
           </figcaption>
         </figure>
       </div>

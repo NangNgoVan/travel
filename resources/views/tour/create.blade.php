@@ -121,15 +121,15 @@
                                 <div id="pac-container">
                                   <!-- Tìm kiếm -->
                                   <div id="type-selector" class="pac-controls">
-                                    <input type="radio" name="type" id="changetype-all" checked>
+                                    <input type="radio" name="type" id="changetype-all" class="button-type" checked>
                                     <label for="changetype-all">Tất cả</label>
-                                    <input type="radio" name="type" id="changetype-hotel">
+                                    <input type="radio" name="type" id="changetype-hotel" class="button-type">
                                     <label for="changetype-establishment">Khách sạn</label>
-                                    <input type="radio" name="type" id="changetype-restaurant">
+                                    <input type="radio" name="type" id="changetype-restaurant" class="button-type">
                                     <label for="changetype-address">Nhà hàng</label>
-                                    <input type="radio" name="type" id="changetype-store">
+                                    <input type="radio" name="type" id="changetype-store" class="button-type">
                                     <label for="changetype-address">Cửa hàng, chợ</label>
-                                    <input type="radio" name="type" id="changetype-park">
+                                    <input type="radio" name="type" id="changetype-park" class="button-type">
                                     <label for="changetype-geocode">Giải trí</label>
                                     <input class="form-control" style="width: 250px;" id="pac-input" type="text"
                                           placeholder="Tìm kiếm địa điểm">
@@ -163,7 +163,7 @@
                   </div>
                 </div>
                 <div class="row">
-                    <button class="btn btn-default col-sm-3 col-sm-offset-9" data-toggle="modal" data-target="#simple-tour">Tour mẫu</button>
+                    <button class="btn btn-default col-sm-3 col-sm-offset-9" data-toggle="modal" data-target="#simple-tour" id="simple-tour-button">Tour mẫu</button>
                       <!-- modal -->
                     <div class="modal fade" id="simple-tour" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                       <div class="modal-dialog modal-lg" role="document">
@@ -194,13 +194,6 @@
                       </div>
                     </div>
                   </div>
-
-                 
-                </div>
-
-                <div class="row">
-                  Điểm đến nổi bật
-                  @include('sections.places')
                 </div>
                </div>
             </div>
@@ -216,6 +209,15 @@
           google.maps.event.trigger(map, "resize");
       });
 
+     $("#simple-tour").on("shown.bs.modal", function () {
+          $.ajax({
+            url: "/simple-tour",
+            success: function(result) {
+                alert(result);
+            }
+          });
+      });
+    
      var travelPoints = [];
      var markers = [];
      var map, places, infoWindow;
@@ -226,6 +228,8 @@
 
      var marker;
      var place;
+
+     var type = ['logding'];
 
      function initMap() {
         var hanoi = {lat:21.0227003 , lng: 105.801944};
@@ -262,40 +266,6 @@
 
         map.addListener('dragend', search);
       }
-
-      // function fuck() {
-      //     infowindow.close();
-      //     marker.setVisible(false);
-      //     place = autocomplete.getPlace();
-      //     if (!place.geometry) {
-      //       window.alert("No details available for input: '" + place.name + "'");
-      //       return;
-      //     }
-
-      //     // If the place has a geometry, then present it on a map.
-      //     if (place.geometry.viewport) {
-      //       map.fitBounds(place.geometry.viewport);
-      //     } else {
-      //       map.setCenter(place.geometry.location);
-      //       map.setZoom(17);  // Why 17? Because it looks good.
-      //     }
-      //     marker.setPosition(place.geometry.location);
-      //     marker.setVisible(true);
-
-      //     var address = '';
-      //     if (place.address_components) {
-      //       address = [
-      //         (place.address_components[0] && place.address_components[0].short_name || ''),
-      //         (place.address_components[1] && place.address_components[1].short_name || ''),
-      //         (place.address_components[2] && place.address_components[2].short_name || '')
-      //       ].join(' ');
-      //     }
-
-      //     infowindowContent.children['place-icon'].src = place.icon;
-      //     infowindowContent.children['place-name'].textContent = place.name;
-      //     infowindowContent.children['place-address'].textContent = address;
-      //     infowindow.open(map, marker);
-      // }
 
       function updateSchedule() {
         var marker = this;
@@ -340,9 +310,10 @@
       }
 
       function search() {
+
         var search =  {
           bounds: map.getBounds(),
-          types: ['lodging']
+          types: type
         };
 
         places.nearbySearch(search, function(results, status) {
@@ -409,6 +380,19 @@
             input.placeholder = 'Nhập thành phố';
         }
       }
+
+      function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            //autocomplete.setTypes(types);
+            type = types;
+            search();
+          });
+        }
+      setupClickListener('changetype-all', ['lodging', 'restaurant', 'store']);
+      setupClickListener('changetype-hotel', ['lodging']);
+      setupClickListener('changetype-restaurant', ['restaurant']);
+      setupClickListener('changetype-store', ['store']);
     </script>
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlz-_qxxGs2xQfKf4uMo49WRFh23pDN3Q&libraries=places&callback=initMap" async defer></script>
 @endsection

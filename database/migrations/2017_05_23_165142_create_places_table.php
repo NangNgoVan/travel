@@ -17,6 +17,7 @@ class CreatePlacesTable extends Migration
             $table->increments('id');
             $table->string('place_map_id');
             $table->string('title');
+             $table->string('thumbnail');
             $table->string('description');
             $table->string('address');
             $table->timestamps();

@@ -19,7 +19,7 @@ class CreateToursTable extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->date('start_at');
-            $table->string('schedule');
+            $table->text('schedule');
             $table->integer('adult_number');
             $table->integer('childrend_number');
             $table->timestamps();

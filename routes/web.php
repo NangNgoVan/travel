@@ -44,16 +44,12 @@ Route::get('/tour/{id?}', function($id = null) {
 	return view('tour.detail');
 });
 
-Route::get('/search',function(Request $request) {
-
-	if($request->date && $request->price && $request->phone) {
-		$tours = DB::select('select * from tours where phone_number ='.$request->phone);
-		//dd($table);
-		return view('search', ['tours' => $tours]);
-	}
-	
-	return back();
+Route::get('/place/{id?}', function($id = null) {
+	return view('place.detail');
 });
+
+Route::get('/search','SearchController@index');
+Route::get('/simple-tour', 'SearchController@simpleTourList');
 
 
 

@@ -24,5 +24,7 @@
 <script src="{{asset('js/parallax.js')}}"></script>
 <script src="{{asset('js/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/scrolling.js')}}"></script>
+<script src="{{asset('js/search.nav.js')}}"></script>
+</script>
 </body>
 </html>
